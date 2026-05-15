@@ -1,0 +1,136 @@
+{
+  "theme_archetype": {
+    "domain": "Wedding / Event",
+    "theme": "LIGHT",
+    "archetype": "1 (Organic & Earthy) - Customized for 'Modern minimal romantic'",
+    "vibe": "Elegant, soft, warm, minimal, romantic, airy",
+    "rationale": "A soft cream/blush/sage palette with elegant typography conveys romance and sophistication, avoiding the clinical feel of pure white or the overused dark tech aesthetics."
+  },
+  "color_palette": {
+    "base": "#FAF9F6",
+    "surface": "#F4EBE6",
+    "surface_alt": "#F2EBE5",
+    "primary": "#8BA08E",
+    "primary_foreground": "#FFFFFF",
+    "accent": "#D4A3A2",
+    "text_primary": "#2C2C2C",
+    "text_secondary": "#5C5C5C",
+    "border": "#E8DFD8",
+    "gradient_hero": "linear-gradient(180deg, rgba(250,249,246,0) 0%, rgba(250,249,246,1) 100%)"
+  },
+  "typography": {
+    "heading_font": "Cormorant Garamond, serif",
+    "body_font": "Outfit, sans-serif",
+    "font_import": "@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap');",
+    "h1": "text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-light",
+    "h2": "text-3xl sm:text-4xl lg:text-5xl tracking-tight font-light",
+    "h3": "text-xl sm:text-2xl font-light",
+    "body": "text-base md:text-lg font-light leading-relaxed",
+    "overline": "text-sm uppercase tracking-[0.2em] font-medium"
+  },
+  "layout_spacing": {
+    "container": "max-w-7xl mx-auto px-6 md:px-12",
+    "section_padding": "py-20 md:py-32",
+    "bento_gap": "gap-8 md:gap-12",
+    "card_padding": "p-8 md:p-12"
+  },
+  "assets_media": {
+    "hero_background": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/53fe6153-c7ba-4d29-ba4c-4c2cf7dd84fa/images/c5978b192b77400bd3329bb726c6d83d320c56109107f4e7bbe54e3c49b0a267.png",
+      "description": "Subtle cream blush watercolor texture used as a blended background for the hero section."
+    },
+    "ornamental_background": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/53fe6153-c7ba-4d29-ba4c-4c2cf7dd84fa/images/9d6f176c565b405c07a59185e17192d8c101ec2d1737fd2bab1e63a605d4a9d4.png",
+      "description": "Sage eucalyptus leaves, can be used as a subtle accent image or footer background."
+    },
+    "gallery_photos": [
+      {
+        "url": "https://customer-assets.emergentagent.com/job_53fe6153-c7ba-4d29-ba4c-4c2cf7dd84fa/artifacts/tm0ks999_shared%20image%20%284%29.jpg",
+        "description": "Pre-wedding photo 1"
+      },
+      {
+        "url": "https://customer-assets.emergentagent.com/job_53fe6153-c7ba-4d29-ba4c-4c2cf7dd84fa/artifacts/p0l2st2g_shared%20image%20%283%29.jpg",
+        "description": "Pre-wedding photo 2"
+      },
+      {
+        "url": "https://customer-assets.emergentagent.com/job_53fe6153-c7ba-4d29-ba4c-4c2cf7dd84fa/artifacts/ayzztwev_shared%20image%20%282%29.jpg",
+        "description": "Pre-wedding photo 3"
+      },
+      {
+        "url": "https://customer-assets.emergentagent.com/job_53fe6153-c7ba-4d29-ba4c-4c2cf7dd84fa/artifacts/2942kr7j_shared%20image%20%281%29.jpg",
+        "description": "Pre-wedding photo 4"
+      },
+      {
+        "url": "https://customer-assets.emergentagent.com/job_53fe6153-c7ba-4d29-ba4c-4c2cf7dd84fa/artifacts/eagy8jm1_shared%20image.jpg",
+        "description": "Pre-wedding photo 5"
+      }
+    ]
+  },
+  "component_strategy": {
+    "hero": {
+      "layout": "Min-h-screen flex flex-col justify-center items-center text-center relative overflow-hidden",
+      "visuals": "Use the 'hero_background' as an absolute positioned image with object-cover and opacity-30, fading to the base color at the bottom via CSS gradient.",
+      "content": "Overline 'WE ARE GETTING MARRIED', massive elegant names 'Simran & Sagar' with an ampersand in a different font weight/italic, date 'June 23-25, 2026', and a minimal dynamic countdown timer below."
+    },
+    "countdown_timer": {
+      "logic": "Target date: June 23, 2026 00:00:00. Show Days, Hours, Minutes, Seconds.",
+      "styling": "A horizontal flex row of small glassmorphic or border-only blocks. Very subtle border-sage/20. Numbers in Cormorant Garamond, labels in Outfit uppercase."
+    },
+    "event_schedule": {
+      "layout": "Vertical timeline or staggered bento layout.",
+      "events": [
+        {
+          "date": "23th June, 2026",
+          "title": "Bhog Saheb & Mehendi Night",
+          "details": "Morning Bhog Saheb. Evening Mehendi + DJ Party.",
+          "location": "Our Residence, Manipur Layout, VMV Road, Amravati"
+        },
+        {
+          "date": "24th June, 2026",
+          "title": "Saath & Ladies Sangeet",
+          "details": "Morning Saath. Evening Ladies Sangeet and Tel Bukhi.",
+          "location": "Telai Celebration Lawn, Amravati"
+        },
+        {
+          "date": "25th June, 2026",
+          "title": "Wedding & Reception",
+          "details": "Noon Wedding. Night Reception.",
+          "location": "Telai Celebration Lawn, Amravati"
+        }
+      ],
+      "styling": "Cards with soft background 'surface' color, 1px subtle border, no heavy drop shadows. Generous padding (p-8 or p-12)."
+    },
+    "photo_gallery": {
+      "layout": "Masonry or overlapping asymmetrical grid using CSS columns or grid-cols-12.",
+      "styling": "Use the 5 user-provided images. Images should have very subtle border-radius (e.g., rounded-md or rounded-xl) to feel elegant. Incorporate parallax scroll effects with framer-motion."
+    },
+    "venue_and_contact": {
+      "layout": "Two-column grid (md:grid-cols-2). Left: Maps/Venue, Right: RSVP Contacts.",
+      "contact_numbers": ["+91 9403169974", "+91 9767750684"],
+      "maps_link": "Telai Celebration Lawn, Amravati",
+      "styling": "Minimalist map placeholder or embedded iframe with grayscale filter if possible. Elegant phone icons (lucide-react)."
+    }
+  },
+  "technical_requirements": {
+    "libraries": [
+      "framer-motion (for page transitions and scroll animations)",
+      "lucide-react (for elegant, thin icons)",
+      "clsx, tailwind-merge (for class utility)"
+    ],
+    "installation_commands": "yarn add framer-motion lucide-react clsx tailwind-merge date-fns",
+    "animations": {
+      "scroll": "Staggered fade-up for schedule items and gallery images.",
+      "hero": "Slow, subtle scale-up of the background image. Fade-in for names."
+    }
+  },
+  "instructions_to_main_agent": [
+    "Create the site strictly as a React static landing page (no backend).",
+    "Ensure the index.css includes the provided font imports and tailwind directives.",
+    "Do not use Shadcn 'Card' components if they force strong borders/shadows; build custom elegant divs using the provided color palette.",
+    "Inject the design guidelines colors into tailwind.config.js or use inline arbitrary values/custom CSS variables.",
+    "ALL interactive elements and key information (countdown, schedule cards, RSVP buttons) MUST have 'data-testid' attributes.",
+    "Use framer-motion for smooth entrance animations on scroll. Since it's a wedding site, motion should feel deliberate, slow, and romantic.",
+    "Ensure 'Cormorant Garamond' is applied to the main headings (Simran & Sagar) and 'Outfit' for all other text.",
+    "DO NOT use generic placeholder images. Map the gallery exactly to the 5 provided URLs."
+  ]
+}
