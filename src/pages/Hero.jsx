@@ -80,11 +80,11 @@ export default function Hero() {
                        text-6xl sm:text-7xl md:text-8xl lg:text-[8.5rem]
                        font-light tracking-tight"
           >
-            Simran
-            <span className="amp block md:inline md:mx-4 italic font-light">
+            Sagar
+            <span className="amp inline md:inline md:mx-4 italic font-light pl-2 pr-2">
               &amp;
             </span>
-            Sagar
+            Simran
           </motion.h1>
 
           <motion.div
@@ -163,8 +163,8 @@ export default function Hero() {
       </div>
 
       {/* scroll cue */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 scroll-cue">
-        <span className="overline" style={{ fontSize: "0.6rem" }}>
+      <div className="relative z-10 flex flex-col items-center gap-2 pb-6 mt-4 scroll-cue">
+        <span className="overline text-[0.6rem]">
           Scroll
         </span>
         <div className="w-px h-10 bg-[#5C5C5C]/40" />

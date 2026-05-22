@@ -5,6 +5,8 @@ import Schedule from "./Schedule";
 import Gallery from "./Gallery";
 import Venue from "./Venue";
 import Footer from "./Footer";
+import Fireworks from "./Fireworks";
+import HangingLightSwitch from "./HangingLightSwitch";
 
 export default function Invitation() {
   return (
@@ -19,6 +21,8 @@ export default function Invitation() {
       <Gallery />
       <Venue />
       <Footer />
+      <Fireworks />
+      {/* <HangingLightSwitch /> */}
     </main>
   );
 }

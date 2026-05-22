@@ -43,27 +43,36 @@ export default function Gallery() {
           testid="gallery-heading"
         />
 
-        <div className="mt-16 grid md:grid-cols-12 md:auto-rows-[260px] gap-4 md:gap-5">
-          {photos.map((p, i) => (
-            <motion.button
-              key={p.url}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 1, delay: i * 0.12 }}
-              onClick={() => setActive(p.url)}
-              data-testid={`gallery-image-${i}`}
-              className={`relative overflow-hidden rounded-sm border border-soft group focus:outline-none ${p.cls}`}
-            >
-              <img
-                src={p.url}
-                alt={`Simran and Sagar ${i + 1}`}
-                loading="lazy"
-                className="w-full h-full object-cover gallery-img"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </motion.button>
-          ))}
+        <div className="mt-16 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-4 md:gap-6 w-max px-1">
+            {photos.map((p, i) => (
+              <motion.button
+                key={p.url}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: i * 0.12 }}
+                onClick={() => setActive(p.url)}
+                data-testid={`gallery-image-${i}`}
+                className="
+          relative overflow-hidden rounded-2xl
+          border border-soft group focus:outline-none
+          w-[280px] md:w-[380px]
+          h-[380px] md:h-[500px]
+          shrink-0
+        "
+              >
+                <img
+                  src={p.url}
+                  alt={`Simran and Sagar ${i + 1}`}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </motion.button>
+            ))}
+          </div>
         </div>
       </div>
 
