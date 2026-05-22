@@ -8,73 +8,75 @@ export default function EnvelopeIntro() {
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-[#f6f1ea] relative overflow-hidden">
 
-      {/* soft glow background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.8),_transparent_60%)]" />
+      {/* soft cinematic glow background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.9),_transparent_60%)]" />
+
+      {/* INVITATION REVEAL (behind envelope) */}
+      {opened && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 1.2 }}
+          className="absolute inset-0"
+        >
+          <Invitation />
+        </motion.div>
+      )}
 
       {/* ENVELOPE */}
       <AnimatePresence>
         {!opened && (
           <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 1.1, opacity: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: [0, -8, 0] }}
+            transition={{
+              y: { repeat: Infinity, duration: 3, ease: "easeInOut" },
+              opacity: { duration: 0.6 },
+              scale: { duration: 0.6 }
+            }}
             onClick={() => setOpened(true)}
             className="relative cursor-pointer"
           >
 
-            {/* envelope shadow */}
-            <div className="absolute inset-0 translate-y-3 blur-xl bg-black/10 rounded-xl" />
+            {/* shadow */}
+            <div className="absolute inset-0 translate-y-6 blur-2xl bg-black/10 rounded-xl" />
 
             {/* envelope body */}
-            <div className="w-[340px] h-[220px] bg-[#fffaf4] border border-[#e7d8c7] rounded-md relative overflow-hidden shadow-2xl">
+            <div className="w-[360px] h-[230px] bg-[#fffaf4] border border-[#e7d8c7] rounded-md relative shadow-2xl overflow-hidden">
 
-              {/* diagonal inner fold */}
-              <div className="absolute inset-0">
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#f3e7d9] to-transparent opacity-60" />
-              </div>
+              {/* paper fold depth */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#f3e7d9]/70 to-transparent" />
 
-              {/* flap */}
+              {/* top flap (opens later) */}
               <motion.div
-                initial={{ rotateX: 0 }}
-                animate={{ rotateX: 0 }}
-                className="absolute top-0 left-0 w-full h-1/2 bg-[#f0e3d2] origin-top rounded-t-md"
+                animate={opened ? { rotateX: 180 } : { rotateX: 0 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute top-0 left-0 w-full h-1/2 bg-[#f0e3d2] origin-top"
                 style={{
                   clipPath: "polygon(0 0, 100% 0, 50% 100%)",
                 }}
               />
 
               {/* wax seal */}
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#b46a4d] to-[#7a3f2c] shadow-lg flex items-center justify-center">
-                  <span className="text-white text-[10px]">S & S</span>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2"
+              >
+                <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#b46a4d] to-[#6d3b2a] shadow-lg flex items-center justify-center text-white text-[10px] font-semibold">
+                  S & S
                 </div>
-              </div>
+              </motion.div>
 
               {/* text */}
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <p className="text-[#6b5b4b] tracking-[0.3em] text-xs">
+                <p className="text-[#6b5b4b] tracking-[0.35em] text-xs">
                   WEDDING INVITATION
                 </p>
-                <p className="text-[#9a8573] text-[10px] mt-2">
+                <p className="text-[#9a8573] text-[10px] mt-2 animate-pulse">
                   Tap to open
                 </p>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* INVITATION REVEAL */}
-      <AnimatePresence>
-        {opened && (
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="w-full"
-          >
-            <Invitation />
           </motion.div>
         )}
       </AnimatePresence>
