@@ -1,6 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
 const photos = [
@@ -15,28 +14,56 @@ export default function Gallery() {
   const [index, setIndex] = useState(0);
   const lockRef = useRef(false);
   const timerRef = useRef(null);
+  const viewerRef = useRef(null);
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
 
   const goNext = () => setIndex((prev) => Math.min(prev + 1, photos.length - 1));
   const goPrev = () => setIndex((prev) => Math.max(prev - 1, 0));
 
-  const handleWheel = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    const el = viewerRef.current;
+    if (!el) return;
 
-    if (lockRef.current) return;
+    const handleWheel = (e) => {
+      e.preventDefault();
+      if (lockRef.current) return;
 
-    const threshold = 20;
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) < 20) return;
 
-    // Only respond to horizontal scroll
-    if (Math.abs(e.deltaX) < threshold) return;
+      lockRef.current = true;
+      if (delta > 0) goNext();
+      else goPrev();
 
-    lockRef.current = true;
+      clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => {
+        lockRef.current = false;
+      }, 450);
+    };
 
-    if (e.deltaX > 0) goNext();
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => {
+      el.removeEventListener("wheel", handleWheel);
+      clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  const onTouchStart = (e) => {
+    const t = e.touches[0];
+    touchStartX.current = t.clientX;
+    touchStartY.current = t.clientY;
+  };
+
+  const onTouchEnd = (e) => {
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX.current;
+    const dy = t.clientY - touchStartY.current;
+
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+
+    if (dx < 0) goNext();
     else goPrev();
-
-    timerRef.current = setTimeout(() => {
-      lockRef.current = false;
-    }, 450);
   };
 
   return (
@@ -45,12 +72,14 @@ export default function Gallery() {
         <SectionHeading
           overline="Moments, Together"
           title="A journey through our memories."
-          kicker="Scroll on the photos to move through each moment."
+          kicker="Scroll or swipe on the photos to move through each moment."
         />
 
         <div
-          onWheel={handleWheel}
-          className="mt-20 relative h-[520px] flex items-center justify-center overflow-hidden"
+          ref={viewerRef}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+          className="mt-20 relative h-[520px] flex items-center justify-center overflow-hidden touch-pan-y"
         >
           {photos.map((img, i) => {
             const distance = i - index;
@@ -60,6 +89,7 @@ export default function Gallery() {
               <motion.img
                 key={img}
                 src={img}
+                draggable={false}
                 onClick={() => setIndex(i)}
                 animate={{
                   scale: isActive ? 1 : 0.7,
@@ -71,7 +101,7 @@ export default function Gallery() {
                 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute w-[320px] h-[420px] object-cover rounded-2xl shadow-2xl cursor-pointer border border-white/10 will-change-transform"
-                style={{ transformStyle: "preserve-3d" }}
+                style={{ transformStyle: "preserve-3d", WebkitUserSelect: "none", userSelect: "none" }}
               />
             );
           })}
