@@ -7,6 +7,7 @@ import Venue from "./Venue";
 import Footer from "./Footer";
 import Fireworks from "./Fireworks";
 import HangingLightSwitch from "./HangingLightSwitch";
+import FloatingEffects from "./FloatingEffects";
 
 export default function Invitation() {
   return (
@@ -15,6 +16,7 @@ export default function Invitation() {
       className="min-h-screen bg-base text-[#2C2C2C] font-sans-body"
       style={{ background: "var(--c-base)" }}
     >
+      <FloatingEffects />
       <Hero />
       <OurStory />
       <Schedule />
